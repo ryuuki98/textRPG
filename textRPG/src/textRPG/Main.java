@@ -3,7 +3,7 @@ package textRPG;
 public class Main {
 
 	public static void main(String[] args) {
-		//initial commit
+		GameManager gameManager = new GameManager();
+		gameManager.run();
 	}
-
 }
