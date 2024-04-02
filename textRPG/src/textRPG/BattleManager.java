@@ -10,28 +10,26 @@ public class BattleManager {
 	private final int SKILL = 2;
 
 	private Random random = new Random();
-	
+
 	private ArrayList<Player> players;
 	private ArrayList<Unit> mob_List;
-	
+
 	private UnitManager unitManager;
-	
+
 	public BattleManager() {
 		players = new ArrayList<Player>();
 		mob_List = new ArrayList<Unit>();
-		
+
 		unitManager = new UnitManager();
 		unitManager.createPlayers(players);
-		
-	
-	}
 
+	}
 
 	public void battle() {
 		mobSetting();
 		runBattle();
+		System.out.println("전투 종료");
 	}
-
 
 	private void runBattle() {
 		while (playerAllDead() && mobsAllDead()) {
@@ -41,26 +39,23 @@ public class BattleManager {
 		}
 	}
 
-
 	private void attack() {
 		playerAttack();
 		monsterAttack();
 	}
 
-
 	private void monsterAttack() {
-		for (int i = 0; i <mob_List.size(); i++) {
-			Unit mob =mob_List.get(i);
+		for (int i = 0; i < mob_List.size(); i++) {
+			Unit mob = mob_List.get(i);
 			if (mob.isDead()) {
 				continue;
 			}
 
 			int targetIndex = searchTargetIndexFromPlayers();
 			mob.attack(players.get(targetIndex));
-			
+
 		}
 	}
-
 
 	private void playerAttack() {
 		for (int i = 0; i < players.size(); i++) {
@@ -74,14 +69,13 @@ public class BattleManager {
 			int select = GameManager.inputNumber("select");
 			if (select == ATTACK_MOB) {
 				player.attack(mob_List.get(targetIndex));
-			}else if (select == SKILL) {
-				player.skill();
+			} else if (select == SKILL) {
+				player.skill(mob_List);
 			}
-		
+
 			printUnitState();
 		}
 	}
-
 
 	private int searchTargetIndexFromMobList() {
 		int index = -1;
@@ -94,6 +88,7 @@ public class BattleManager {
 		}
 		return index;
 	}
+
 	private int searchTargetIndexFromPlayers() {
 		int index = -1;
 		while (true) {
@@ -105,26 +100,20 @@ public class BattleManager {
 		}
 		return index;
 	}
-	
-	
-
 
 	private void runPlayerAttack(int select) {
-		
-	}
 
+	}
 
 	private void printPlayerMenu(Player player) {
 		System.out.println("======[MENU]======");
-		System.out.printf("[%s] [1.공격] [2.스킬]\n",player.getName());
+		System.out.printf("[%s] [1.공격] [2.스킬]\n", player.getName());
 	}
-
 
 	private void printUnitState() {
 		printPlayers();
 		printMobs();
 	}
-
 
 	private void printMobs() {
 		System.out.println("======[MONSTER]======");
@@ -133,7 +122,6 @@ public class BattleManager {
 		}
 	}
 
-
 	private void printPlayers() {
 		System.out.println("======[player]======");
 		for (int i = 0; i < players.size(); i++) {
@@ -141,16 +129,16 @@ public class BattleManager {
 		}
 	}
 
-
 	private boolean playerAllDead() {
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).getHp()>0) {
+			if (players.get(i).getHp() > 0) {
 				return true;
 			}
 		}
-			return false;
+		System.out.println("플레이어가 모두 쓰러졌다.");
+		System.exit(0);
+		return false;
 	}
-
 
 	private boolean mobsAllDead() {
 		for (int i = 0; i < mob_List.size(); i++) {
@@ -158,27 +146,19 @@ public class BattleManager {
 				return true;
 			}
 		}
-		
-		mob_List.clear();
-	    return false;
-	}
 
+		mob_List.clear();
+		return false;
+	}
 
 	private void mobSetting() {
 		try {
-			unitManager.createMobs(mob_List,4);
+			unitManager.createMobs(mob_List, 4);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	
-
-
-
-
-
 
 }

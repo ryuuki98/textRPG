@@ -6,10 +6,4 @@ public class UnitOrc extends Unit{
 		super("오크");
 	}
 
-	@Override
-	public void skill() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

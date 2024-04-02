@@ -1,16 +1,15 @@
 package textRPG;
 
-public class Player extends Unit{
+import java.util.ArrayList;
+
+public abstract class Player extends Unit{
 	
 	
 
 	public Player(String name, int hp, int power) {
 		super(name, hp, power);
 	}
-
-	@Override
-	public void skill() {
-		
-	}
-
+	
+	abstract public void skill(ArrayList<Unit> mob_List);
+	
 }

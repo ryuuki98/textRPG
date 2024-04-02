@@ -1,5 +1,6 @@
 package textRPG;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Unit {
@@ -39,6 +40,12 @@ public abstract class Unit {
 			isDead = true;
 		}
 	}
+	public int getPower() {
+		return power;
+	}
+	public void setPower(int power) {
+		this.power = power;
+	}
 	
 	public boolean isDead() {
 		return isDead;
@@ -49,7 +56,6 @@ public abstract class Unit {
 		System.out.printf("%s는 %s에게 %d 데미지를 입혔다. \n",this.name ,unit.name,this.power );
 	}
 	
-	abstract public void skill();
 	@Override
 	public String toString() {
 		return String.format("[%s] [%d/%d] [%d]", name,hp,maxHp,power);

@@ -6,10 +6,5 @@ public class UnitWolf extends Unit{
 		super("늑대");
 	}
 
-	@Override
-	public void skill() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

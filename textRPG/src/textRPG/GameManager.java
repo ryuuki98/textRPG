@@ -30,6 +30,7 @@ public class GameManager {
 
 	private void runMenu(int select) {
 		if (select == BATTLE) {
+			
 			battleManager.battle();
 		} else if (select == END_GAME) {
 			endGame();

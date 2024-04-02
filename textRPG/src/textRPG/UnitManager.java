@@ -9,9 +9,9 @@ public class UnitManager {
 	private String path = "textRPG.";
 
 	public void createPlayers(ArrayList<Player> players) {
-		players.add(new Player("전사", 1000, 45));
-		players.add(new Player("마법사", 800, 60));
-		players.add(new Player("힐러", 500, 70));
+		players.add(new PlayerWarrior("전사", 1000, 45));
+		players.add(new PlayerMagician("마법사", 800, 60));
+		players.add(new PlayerHealer("힐러", 500, 70));
 	}
 
 	public void createMobs(ArrayList<Unit> mob_List,int mobCount) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
