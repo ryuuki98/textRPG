@@ -27,5 +27,20 @@ public abstract class Unit {
 	public String getName() {
 		return name;
 	}
+	
+	public int getHp() {
+		return hp;
+	}
+	
+
+	public void attack(Unit target) {
+		
+	}
+	
 	abstract public void skill();
+	@Override
+	public String toString() {
+		return String.format("[%s] [%d/%d] [%d]", name,hp,maxHp,power);
+	}
+	
 }

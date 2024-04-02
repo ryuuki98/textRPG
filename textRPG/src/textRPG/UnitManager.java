@@ -27,7 +27,6 @@ public class UnitManager {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-			System.out.println(mob_List.get(i).getName());
 		}
 	}
 

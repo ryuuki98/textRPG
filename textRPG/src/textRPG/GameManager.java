@@ -50,7 +50,7 @@ public class GameManager {
 	}
 
 
-	private int inputNumber(String message) {
+	public static int inputNumber(String message) {
 		int number = 0;
 		System.out.println(message + " : ");
 		try {
