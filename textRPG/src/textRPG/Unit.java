@@ -24,5 +24,8 @@ public abstract class Unit {
 		this.power = power;
 	}
 	
+	public String getName() {
+		return name;
+	}
 	abstract public void skill();
 }

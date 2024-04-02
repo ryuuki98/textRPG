@@ -2,7 +2,7 @@ package textRPG;
 
 public class UnitWolf extends Unit{
 
-	public UnitWolf(String name) {
+	public UnitWolf() {
 		super("늑대");
 	}
 

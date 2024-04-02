@@ -2,7 +2,7 @@ package textRPG;
 
 public class UnitOrc extends Unit{
 
-	public UnitOrc(String name) {
+	public UnitOrc() {
 		super("오크");
 	}
 
