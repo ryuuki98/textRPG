@@ -9,6 +9,7 @@ public abstract class Unit {
 	private int maxHp;
 	private int hp;
 	private int power;
+	private boolean isDead;
 	
 	public Unit(String name) {
 		this.name = name;
@@ -31,10 +32,21 @@ public abstract class Unit {
 	public int getHp() {
 		return hp;
 	}
+	public void setHp(int hp) {
+		this.hp = hp;
+		if (this.hp <=0) {
+			this.hp = 0;
+			isDead = true;
+		}
+	}
 	
+	public boolean isDead() {
+		return isDead;
+	}
 
-	public void attack(Unit target) {
-		
+	public void attack(Unit unit) {
+		unit.setHp(unit.getHp() - this.power);
+		System.out.printf("%s는 %s에게 %d 데미지를 입혔다. \n",this.name ,unit.name,this.power );
 	}
 	
 	abstract public void skill();

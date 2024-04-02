@@ -3,9 +3,13 @@ package textRPG;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BattleManager {
-	
+	private final int ATTACK_MOB = 1;
+	private final int SKILL = 2;
+
+	private Random random = new Random();
 	
 	private ArrayList<Player> players;
 	private ArrayList<Unit> mob_List;
@@ -30,11 +34,10 @@ public class BattleManager {
 
 
 	private void runBattle() {
-		while (playerAllDead() || mobsAllDead()) {
+		while (playerAllDead() && mobsAllDead()) {
 			System.out.println("======[battle]======");
 			printUnitState();
 			attack();
-			
 		}
 	}
 
@@ -53,16 +56,46 @@ public class BattleManager {
 
 	private void playerAttack() {
 		for (int i = 0; i < players.size(); i++) {
-			printPlayerMenu(i);
+			Player player = players.get(i);
+			if (player.isDead() || !mobsAllDead()) {
+				continue;
+			}
+
+			int targetIndex = searchTargetIndex();
+			printPlayerMenu(player);
 			int select = GameManager.inputNumber("select");
+			if (select == ATTACK_MOB) {
+				player.attack(mob_List.get(targetIndex));
+			}else if (select == SKILL) {
+				player.skill();
+			}
+		
 			printUnitState();
 		}
 	}
 
 
-	private void printPlayerMenu(int i) {
+	private int searchTargetIndex() {
+		int index = -1;
+		while (true) {
+			int ranIdx = random.nextInt(mob_List.size());
+			if (!mob_List.get(ranIdx).isDead()) {
+				index = ranIdx;
+				break;
+			}
+		}
+		return index;
+	}
+
+
+	private void runPlayerAttack(int select) {
+		
+	}
+
+
+	private void printPlayerMenu(Player player) {
 		System.out.println("======[MENU]======");
-		System.out.printf("[%s] [1.공격] [2.스킬]\n",players.get(i).getName());
+		System.out.printf("[%s] [1.공격] [2.스킬]\n",player.getName());
 	}
 
 
@@ -100,7 +133,7 @@ public class BattleManager {
 
 	private boolean mobsAllDead() {
 		for (int i = 0; i < mob_List.size(); i++) {
-			if (mob_List.get(i).getHp()>0) {
+			if (!mob_List.get(i).isDead()) {
 				return true;
 			}
 		}
