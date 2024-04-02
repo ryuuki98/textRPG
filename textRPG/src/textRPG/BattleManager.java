@@ -49,8 +49,16 @@ public class BattleManager {
 
 
 	private void monsterAttack() {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i <mob_List.size(); i++) {
+			Unit mob =mob_List.get(i);
+			if (mob.isDead()) {
+				continue;
+			}
+
+			int targetIndex = searchTargetIndexFromPlayers();
+			mob.attack(players.get(targetIndex));
+			
+		}
 	}
 
 
@@ -61,7 +69,7 @@ public class BattleManager {
 				continue;
 			}
 
-			int targetIndex = searchTargetIndex();
+			int targetIndex = searchTargetIndexFromMobList();
 			printPlayerMenu(player);
 			int select = GameManager.inputNumber("select");
 			if (select == ATTACK_MOB) {
@@ -75,7 +83,7 @@ public class BattleManager {
 	}
 
 
-	private int searchTargetIndex() {
+	private int searchTargetIndexFromMobList() {
 		int index = -1;
 		while (true) {
 			int ranIdx = random.nextInt(mob_List.size());
@@ -86,6 +94,19 @@ public class BattleManager {
 		}
 		return index;
 	}
+	private int searchTargetIndexFromPlayers() {
+		int index = -1;
+		while (true) {
+			int ranIdx = random.nextInt(players.size());
+			if (!players.get(ranIdx).isDead()) {
+				index = ranIdx;
+				break;
+			}
+		}
+		return index;
+	}
+	
+	
 
 
 	private void runPlayerAttack(int select) {
