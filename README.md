@@ -35,8 +35,8 @@
 
 
  - mob <br>
-   HP - 100 + (0~99) <br>
-   POWER - 10 + (0~9) <br>
+   HP - 100 + (0 ~ 99) <br>
+   POWER - 10 + (0 ~ 9) <br>
    <br>
 
 >demo
