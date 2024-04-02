@@ -40,4 +40,4 @@
    <br>
 
 >demo
-<img src = "" width = 300>
+<img src = "https://github.com/ryuuki98/textRPG/blob/master/textRPG/images/demo.gif" width = 300>
